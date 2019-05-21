@@ -1,0 +1,96 @@
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl;
+
+import android.graphics.Point;
+import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
+
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Rect;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
+public class GLRenderer implements GLSurfaceView.Renderer {
+    float lightpos[] = {0.0f, 0.0f, 4.0f, 0.0f};
+    private float[] perspective = new float[16];
+    private float[] view = new float[16];
+    private Point displaySize;
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        //クリア色
+        gl.glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
+
+        // デプステスト
+        gl.glEnable(GL10.GL_DEPTH_TEST);
+        gl.glDepthFunc(GL10.GL_LEQUAL);
+        gl.glDepthMask(true);
+
+        //裏ポリゴンを描画しない
+        gl.glEnable(GL10.GL_CULL_FACE);
+        gl.glCullFace(GL10.GL_BACK);
+
+        // ライティングをON
+        gl.glEnable(GL10.GL_LIGHTING);
+        // 光源を有効にして位置を設定
+        gl.glEnable(GL10.GL_LIGHT0);
+        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightpos, 0);
+
+        // スムースシェーディング
+        gl.glShadeModel(GL10.GL_SMOOTH);
+    }
+
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        displaySize = new Point(width, height);
+
+        GameSDK sdk = GameSDK.getSDK();
+        sdk.setGL10(gl);
+        sdk.init();
+    }
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        GameSDK sdk = GameSDK.getSDK();
+        sdk.draw(gl);
+    }
+
+    public float[] getPerspective() { return perspective; }
+
+    public float[] getView() { return view; }
+
+    public float[] getProjectionView() {
+        float[] result = new float[16];
+        Matrix.multiplyMM(result, 0, perspective, 0, view, 0);
+        return result;
+    }
+
+    public void beginbRendering(GL10 gl, Camera c) {
+        //ビューポート
+        Rect rect = c.getViewport();
+        gl.glViewport(rect.left, rect.top, rect.right, rect.bottom);
+
+        //バッファクリア
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+        gl.glClearDepthf(1.0f);
+
+        //プロジェクション
+        gl.glMatrixMode(GL10.GL_PROJECTION);
+        gl.glLoadIdentity();
+        gl.glLoadMatrixf(c.getProjectionMatrix(), 0);
+
+        //カメラ
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        gl.glLoadMatrixf(c.getViewMatrix(), 0);
+    }
+
+    public void endRendering() {
+
+    }
+
+    public final Point getDisplaySize() {
+        return displaySize;
+    }
+}
