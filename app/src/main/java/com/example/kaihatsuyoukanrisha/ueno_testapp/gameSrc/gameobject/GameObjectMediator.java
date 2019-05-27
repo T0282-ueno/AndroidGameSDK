@@ -1,15 +1,16 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
-public class GameObjectMediator extends ObjectInterface {
-    private List<GameObject> objects = new ArrayList<>();
-    private List<GameObject> workObjects = new ArrayList<>();
-    private List<GameObject> workChildren = new ArrayList<>();
-    private List<GameObject> deleteObjects = new ArrayList<>();
+public class GameObjectMediator extends GameObject {
+    private List<GameObject> objectList = new ArrayList<>();
+    private Queue<GameObject> workObject = new ArrayDeque<>();
+    private Queue<GameObject> garbageObject = new ArrayDeque<>();
     public Map<String, Integer> layer = new HashMap<String, Integer>() {
         {
             put("SYSTEM_LAYER",0x0000);
@@ -17,82 +18,69 @@ public class GameObjectMediator extends ObjectInterface {
         }
     };
 
-    @Override
-    public boolean init() {
-
-        return true;
-    }
-
-    @Override
-    protected void update() {
-
-    }
-
-    @Override
-    protected void draw() {
-
-    }
-
-    @Override
-    protected void delete() {
-
-    }
-
     public void initGameObjects() {
-        for (GameObject object : objects) {
-            object.init();
+        for (GameObject object : objectList) {
+            workObject.add(object);
 
-            if (!object.children.isEmpty()) {
-                workChildren.addAll(object.children);
+            while (!workObject.isEmpty()) {
+                GameObject work = workObject.poll();
+                work.init();
+
+                workObject.addAll(work.getChildren());
             }
         }
-
-        initChildren();
     }
 
     public void updateGameObjects() {
-        for (GameObject object : objects) {
-            object.update();
+        for (GameObject object : objectList) {
+            workObject.add(object);
 
-            if (!object.children.isEmpty()) {
-                workChildren.addAll(object.children);
+            while (!workObject.isEmpty()) {
+                GameObject work = workObject.poll();
+                work.update();
+
+                workObject.addAll(work.getChildren());
             }
         }
-
-        updateChildren();
-
-        clearDeleteList();
     }
 
     public void drawGameObjects() {
-        for (GameObject object : objects) {
-            object.draw();
+        for (GameObject object : objectList) {
+            workObject.add(object);
 
-            if (!object.children.isEmpty()) {
-                workChildren.addAll(object.children);
+            while (!workObject.isEmpty()) {
+                GameObject work = workObject.poll();
+                work.draw();
+
+                workObject.addAll(work.getChildren());
             }
         }
-
-        drawChildren();
     }
 
     public void allDaleteGameObjects() {
-        for (GameObject object : objects) {
-            object.delete();
+        for (GameObject object : objectList) {
+            workObject.add(object);
 
-            if (!object.children.isEmpty()) {
-                workChildren.addAll(object.children);
+            while (!workObject.isEmpty()) {
+                GameObject work = workObject.poll();
+                work.delete();
+
+                workObject.addAll(work.getChildren());
             }
         }
 
-        deleteChildren();
+        objectList.clear();
     }
 
-    public void deleteObject(GameObject object) {
-        deleteObjects.add(object);
-        if (!object.children.isEmpty()) {
-            deleteObject(object.children);
+    public void addGarbageObject(GameObject object) {
+        garbageObject.add(object);
+    }
+
+    private void cleanGarbageObject() {
+        for (GameObject object : garbageObject) {
+            object.delete();
         }
+        garbageObject.clear();
     }
 
     public void setChild(GameObject parent, GameObject child) {
@@ -100,98 +88,6 @@ public class GameObjectMediator extends ObjectInterface {
     }
 
     protected void addObject(GameObject object) {
-        objects.add(object);
-    }
-
-    private void deleteObject(List<GameObject> childern) {
-        deleteObjects.addAll(childern);
-        for (GameObject child : childern) {
-            if (!child.children.isEmpty()) {
-                deleteObject(child.children);
-            }
-        }
-    }
-
-    private void clearDeleteList() {
-        for (GameObject garbage : deleteObjects) {
-            garbage.delete();
-        }
-        deleteObjects.clear();
-    }
-
-    private void initChildren() {
-        if (workChildren.isEmpty()){
-            return;
-        }
-
-        workObjects.addAll(workChildren);
-        workChildren.clear();
-
-        for (GameObject child : workObjects) {
-            child.init();
-
-            if (!child.children.isEmpty()) {
-                workChildren.addAll(child.children);
-            }
-        }
-
-        initChildren();
-    }
-
-    private void deleteChildren() {
-        if (workChildren.isEmpty()){
-            return;
-        }
-
-        workObjects.addAll(workChildren);
-        workChildren.clear();
-
-        for (GameObject child : workObjects) {
-            child.delete();
-
-            if (!child.children.isEmpty()) {
-                workChildren.addAll(child.children);
-            }
-        }
-
-        deleteChildren();
-    }
-
-    private void updateChildren() {
-        if (workChildren.isEmpty()){
-            return;
-        }
-
-        workObjects.addAll(workChildren);
-        workChildren.clear();
-
-        for (GameObject child : workObjects) {
-            child.update();
-
-            if (!child.children.isEmpty()) {
-                workChildren.addAll(child.children);
-            }
-        }
-
-        updateChildren();
-    }
-
-    private void drawChildren() {
-        if (workChildren.isEmpty()){
-            return;
-        }
-
-        workObjects.addAll(workChildren);
-        workChildren.clear();
-
-        for (GameObject child : workObjects) {
-            child.draw();
-
-            if (!child.children.isEmpty()) {
-                workChildren.addAll(child.children);
-            }
-        }
-
-        drawChildren();
+        objectList.add(object);
     }
 }

@@ -6,58 +6,52 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameObject extends ObjectInterface {
+public class GameObject {
     public Transform transform = new Transform();
-    public GameObject parent;
-    public List<GameObject> children = new ArrayList<>();
+    protected GameObject parent;
+    protected List<GameObject> children = new ArrayList<>();
     public String name;
     public String tag;
     public int layer;
-    private GameObjectMediator mediator = null;
-    private List<ComponentInterface> componentList = new ArrayList<>();
+    protected List<ComponentInterface> componentList = new ArrayList<>();
 
-    public GameObject(GameObjectMediator mediator) {
-        this.mediator = mediator;
+    public GameObject() {
         tag = "default";
-        mediator.addObject(this);
+        layer = 0x1;
     }
 
-    public GameObject(GameObjectMediator mediator, String tag) {
-        this.mediator = mediator;
-        this.tag = tag;
-    }
-
-    public GameObject(GameObjectMediator mediator, String tag, int layer) {
-        this.mediator = mediator;
-        this.tag = tag;
-        this.layer = layer;
-    }
-
-    public boolean init() {
+    protected void init() {
         for (ComponentInterface c : componentList) {
             c.init();
         }
-
-        return true;
     }
 
-    public void delete() {
+    protected void delete() {
         for (ComponentInterface c : componentList) {
             c.delete();
         }
-        mediator = null;
+
+        if (!children.isEmpty()) {
+            for (GameObject child : children) {
+                child.delete();
+            }
+        }
+
+        componentList.clear();
         componentList = null;
     }
 
-    public void update() {
+    protected void update() {
         for (ComponentInterface c : componentList) {
             c.update();
         }
     }
 
-    public void draw() {
+    protected void draw() {
 
     }
+
+    public List<GameObject> getChildren() { return children; }
 
     public <T extends ComponentInterface> T getComponent() {
         T object = null;
@@ -74,4 +68,5 @@ public class GameObject extends ObjectInterface {
         componentList.add(component);
     }
 
+    protected void text() {}
 }
