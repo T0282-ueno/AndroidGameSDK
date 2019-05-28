@@ -39,10 +39,6 @@ public class GameObjectManager {
         }
     }
 
-    public GameObjectManager() {
-
-    }
-
     public void initGameObjects() {
         for (GameObject object : objectList) {
             workObject.add(object);

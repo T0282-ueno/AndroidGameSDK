@@ -21,12 +21,12 @@ public class GameObject {
     static class FriendGameObject extends GameObject {
         //アクセスを許すクラス
         private final String[] permissionClass = {
-            "GameObjectManager"
+            "com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager$"
         };
 
         protected FriendGameObject() {
             for (String name : permissionClass) {
-                if (!this.getClass().getSimpleName().startsWith(name)) {
+                if (!this.getClass().getName().startsWith(name)) {
                     throw new RuntimeException();
                 }
             }
