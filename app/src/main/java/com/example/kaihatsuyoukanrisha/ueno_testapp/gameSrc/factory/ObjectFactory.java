@@ -1,5 +1,6 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
@@ -15,6 +16,7 @@ public class ObjectFactory {
     public GameObject createEmptyObject() {
         GameObject object = new GameObject();
         object.name = "empty";
+        GameSDK.getSDK().getObjectManager().addObject(object);
 
         return object;
     }
@@ -23,6 +25,7 @@ public class ObjectFactory {
         GameObject object = new GameObject();
         object.name = "camera";
         object.addComponent(new Camera(object));
+        GameSDK.getSDK().getObjectManager().addObject(object);
 
         return object;
     }
@@ -30,6 +33,7 @@ public class ObjectFactory {
     public GameObject createCamera(Transform transform) {
         GameObject object = createCamera();
         object.transform = transform;
+        GameSDK.getSDK().getObjectManager().addObject(object);
 
         return object;
     }
