@@ -8,7 +8,7 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.SampleModel;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory.ObjectFactory;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectMediator;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.manager.TextureManager;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLRenderer;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLView;
@@ -25,7 +25,7 @@ public class GameSDK implements Runnable {
     private GLView glView = null;
     private GLRenderer renderer = null;
     private TextureManager textureManager;
-    private GameObjectMediator objectMediator;
+    private GameObjectManager objectMediator;
     private ObjectFactory objectFactory = null;
     private Vector<SceneInterface> sceneVector = new Vector<>();
     private Vector<SceneInterface> nextSceneVector = new Vector<>();
@@ -41,7 +41,7 @@ public class GameSDK implements Runnable {
         renderer = new GLRenderer();
         glView.setRenderer(renderer);
         textureManager = new TextureManager(context);
-        objectMediator = new GameObjectMediator();
+        objectMediator = new GameObjectManager();
         objectFactory = new ObjectFactory(objectMediator);
 
         return true;

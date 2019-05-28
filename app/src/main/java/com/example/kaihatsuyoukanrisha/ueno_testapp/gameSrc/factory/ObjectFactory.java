@@ -2,13 +2,13 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectMediator;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
 
 public class ObjectFactory {
-    private GameObjectMediator mediator;
+    private GameObjectManager mediator;
 
-    public ObjectFactory(GameObjectMediator mediator) {
+    public ObjectFactory(GameObjectManager mediator) {
         this.mediator = mediator;
     }
 

@@ -8,25 +8,76 @@ import java.util.List;
 
 public class GameObject {
     public Transform transform = new Transform();
-    protected GameObject parent;
-    protected List<GameObject> children = new ArrayList<>();
     public String name;
     public String tag;
     public int layer;
-    protected List<ComponentInterface> componentList = new ArrayList<>();
+    private GameObject parent;
+    private List<GameObject> children = new ArrayList<>();
+    private List<ComponentInterface> componentList = new ArrayList<>();
+    private GameObjectManager manager;
+    private static FriendGameObjectManagerBridge managerBridge = new FriendGameObjectManagerBridge();
+
+    //Love Friend Style
+    static class FriendGameObject extends GameObject {
+        //アクセスを許すクラス
+        private final String[] permissionClass = {
+            "GameObjectManager"
+        };
+
+        protected FriendGameObject() {
+            for (String name : permissionClass) {
+                if (!this.getClass().getSimpleName().startsWith(name)) {
+                    throw new RuntimeException();
+                }
+            }
+        }
+
+        protected void init(GameObject object) {
+            object.init();
+        }
+
+        protected void delete(GameObject object) {
+            object.delete();
+        }
+
+        protected void update(GameObject object) {
+            object.update();
+        }
+
+        protected void draw(GameObject object) {
+            object.draw();
+        }
+
+        protected void setManager(GameObject object, GameObjectManager manager) {
+            object.setManager(manager);
+        }
+    }
+
+    //虹色に輝く夢を見つけに行こ
+    static class FriendGameObjectManagerBridge extends GameObjectManager.FriendGameObjectManager {
+        @Override
+        protected void setParent(GameObjectManager manager, GameObject parent, GameObject child) {
+            super.setParent(manager, parent, child);
+        }
+
+        @Override
+        protected void addGarbage(GameObjectManager manager, GameObject object) {
+            super.addGarbage(manager, object);
+        }
+    }
 
     public GameObject() {
         tag = "default";
         layer = 0x1;
     }
 
-    protected void init() {
+    private void init() {
         for (ComponentInterface c : componentList) {
             c.init();
         }
     }
 
-    protected void delete() {
+    private void delete() {
         for (ComponentInterface c : componentList) {
             c.delete();
         }
@@ -41,17 +92,15 @@ public class GameObject {
         componentList = null;
     }
 
-    protected void update() {
+    private void update() {
         for (ComponentInterface c : componentList) {
             c.update();
         }
     }
 
-    protected void draw() {
+    private void draw() {
 
     }
-
-    public List<GameObject> getChildren() { return children; }
 
     public <T extends ComponentInterface> T getComponent() {
         T object = null;
@@ -64,9 +113,25 @@ public class GameObject {
         return null;
     }
 
+    private void setManager(GameObjectManager manager) {
+        this.manager = manager;
+    }
+
     public void addComponent(ComponentInterface component) {
         componentList.add(component);
     }
 
-    protected void text() {}
+    public final GameObject getParent() { return parent; }
+
+    public final List<GameObject> getChildren() { return children; }
+
+    public void setParent(GameObject parent) {
+        managerBridge.setParent(manager, parent, this);
+    }
+
+    public void setChild(GameObject child) {
+        if (child == null) return;
+
+        managerBridge.setParent(manager, this, parent);
+    }
 }
