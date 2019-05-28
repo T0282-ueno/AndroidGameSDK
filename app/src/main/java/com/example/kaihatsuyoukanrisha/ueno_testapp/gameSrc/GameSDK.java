@@ -25,7 +25,7 @@ public class GameSDK implements Runnable {
     private GLView glView = null;
     private GLRenderer renderer = null;
     private TextureManager textureManager;
-    private GameObjectManager objectMediator;
+    private GameObjectManager objectManager;
     private ObjectFactory objectFactory = null;
     private Vector<SceneInterface> sceneVector = new Vector<>();
     private Vector<SceneInterface> nextSceneVector = new Vector<>();
@@ -41,8 +41,8 @@ public class GameSDK implements Runnable {
         renderer = new GLRenderer();
         glView.setRenderer(renderer);
         textureManager = new TextureManager(context);
-        objectMediator = new GameObjectManager();
-        objectFactory = new ObjectFactory(objectMediator);
+        objectManager = new GameObjectManager();
+        objectFactory = new ObjectFactory(objectManager);
 
         return true;
     }
@@ -50,7 +50,7 @@ public class GameSDK implements Runnable {
     public boolean init() {
         changeScene();
 
-        objectMediator.initGameObjects();
+        objectManager.initGameObjects();
         new Thread(this).start();
 
         return true;
@@ -60,7 +60,7 @@ public class GameSDK implements Runnable {
         sdk = null;
         renderer = null;
         textureManager = null;
-        objectMediator = null;
+        objectManager = null;
 
         return true;
     }
@@ -71,7 +71,7 @@ public class GameSDK implements Runnable {
         }
 
         //更新処理
-        objectMediator.updateGameObjects();
+        objectManager.updateGameObjects();
 
         changeWhetherUpdate(false);
     }
@@ -85,7 +85,7 @@ public class GameSDK implements Runnable {
             //描画処理
             for (Camera c : Camera.getCameraList()) {
                 renderer.beginbRendering(gl, c);
-                objectMediator.drawGameObjects();
+                objectManager.drawGameObjects();
 
                 model.draw(gl);
             }
@@ -114,6 +114,10 @@ public class GameSDK implements Runnable {
     }
 
     public GLRenderer getRenderer() { return renderer; }
+
+    public GameObjectManager getObjectManager() {
+        return objectManager;
+    }
 
     @Override
     public void run() {
@@ -159,14 +163,14 @@ public class GameSDK implements Runnable {
     private void changeScene() {
         for (SceneInterface scene : sceneVector) {
             scene.release();
-            objectMediator.allDaleteGameObjects();
+            objectManager.allDaleteGameObjects();
         }
         sceneVector.clear();
         sceneVector.addAll(nextSceneVector);
 
         for (SceneInterface scene : sceneVector) {
             scene.setup();
-            objectMediator.initGameObjects();
+            objectManager.initGameObjects();
         }
         nextSceneVector.clear();
     }

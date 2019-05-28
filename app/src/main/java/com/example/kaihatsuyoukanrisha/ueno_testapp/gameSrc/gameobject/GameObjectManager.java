@@ -37,33 +37,6 @@ public class GameObjectManager {
         protected void draw(GameObject object) {
             super.draw(object);
         }
-
-        protected void setManager(GameObject object, GameObjectManager manager) {
-            super.setManager(object, manager);
-        }
-    }
-
-    //ドリームパレード
-    static class FriendGameObjectManager extends GameObjectManager {
-        private final String[] permissionClass = {
-            "GameObject"
-        };
-
-        protected FriendGameObjectManager() {
-            for (String name : permissionClass) {
-                if (!this.getClass().getSimpleName().startsWith(name)) {
-                    throw new RuntimeException();
-                }
-            }
-        }
-
-        protected void setParent(GameObjectManager manager, GameObject parent, GameObject child) {
-            manager.setParent(parent, child);
-        }
-
-        protected void addGarbage(GameObjectManager manager, GameObject object) {
-            manager.addGarbageObject(object);
-        }
     }
 
     public GameObjectManager() {
@@ -137,7 +110,7 @@ public class GameObjectManager {
         garbageObject.clear();
     }
 
-    private void setParent(GameObject parent, GameObject child) {
+    public void setParent(GameObject parent, GameObject child) {
         if (child.getParent() != null) {
             child.getParent().getChildren().remove(child);
         }
@@ -153,6 +126,5 @@ public class GameObjectManager {
 
     public void addObject(GameObject object) {
         objectList.add(object);
-        objectBridge.setManager(object, this);
     }
 }

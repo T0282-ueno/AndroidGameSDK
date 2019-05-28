@@ -1,5 +1,6 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.ComponentInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
 
@@ -15,7 +16,6 @@ public class GameObject {
     private List<GameObject> children = new ArrayList<>();
     private List<ComponentInterface> componentList = new ArrayList<>();
     private GameObjectManager manager;
-    private static FriendGameObjectManagerBridge managerBridge = new FriendGameObjectManagerBridge();
 
     //Love Friend Style
     static class FriendGameObject extends GameObject {
@@ -46,23 +46,6 @@ public class GameObject {
 
         protected void draw(GameObject object) {
             object.draw();
-        }
-
-        protected void setManager(GameObject object, GameObjectManager manager) {
-            object.setManager(manager);
-        }
-    }
-
-    //虹色に輝く夢を見つけに行こ
-    static class FriendGameObjectManagerBridge extends GameObjectManager.FriendGameObjectManager {
-        @Override
-        protected void setParent(GameObjectManager manager, GameObject parent, GameObject child) {
-            super.setParent(manager, parent, child);
-        }
-
-        @Override
-        protected void addGarbage(GameObjectManager manager, GameObject object) {
-            super.addGarbage(manager, object);
         }
     }
 
@@ -126,12 +109,16 @@ public class GameObject {
     public final List<GameObject> getChildren() { return children; }
 
     public void setParent(GameObject parent) {
-        managerBridge.setParent(manager, parent, this);
+        if (parent == this) return;
+
+        GameObjectManager manager = GameSDK.getSDK().getObjectManager();
+        manager.setParent(parent, this);
     }
 
     public void setChild(GameObject child) {
-        if (child == null) return;
+        if (child == null || child == this) return;
 
-        managerBridge.setParent(manager, this, parent);
+        GameObjectManager manager = GameSDK.getSDK().getObjectManager();
+        manager.setParent(this, child);
     }
 }

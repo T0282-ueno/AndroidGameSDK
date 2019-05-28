@@ -13,14 +13,14 @@ public class ObjectFactory {
     }
 
     public GameObject createEmptyObject() {
-        GameObject object = new GameObject(mediator);
+        GameObject object = new GameObject();
         object.name = "empty";
 
         return object;
     }
 
     public GameObject createCamera() {
-        GameObject object = new GameObject(mediator);
+        GameObject object = new GameObject();
         object.name = "camera";
         object.addComponent(new Camera(object));
 
