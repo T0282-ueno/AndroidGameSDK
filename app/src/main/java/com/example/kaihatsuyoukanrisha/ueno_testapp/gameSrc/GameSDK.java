@@ -1,101 +1,19 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc;
 
-
 import android.content.Context;
 import android.graphics.Point;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.SampleModel;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory.ObjectFactory;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.manager.TextureManager;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLRenderer;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLView;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
-import java.util.Vector;
-
-import javax.microedition.khronos.opengles.GL10;
-
-public class GameSDK implements Runnable {
+public class GameSDK extends GameHandler implements GameSDKInterface {
     private static GameSDK sdk = null;
 
-    private GLView glView = null;
-    private GLRenderer renderer = null;
-    private TextureManager textureManager;
-    private GameObjectManager objectManager;
-    private ObjectFactory objectFactory = null;
-    private Vector<SceneInterface> sceneVector = new Vector<>();
-    private Vector<SceneInterface> nextSceneVector = new Vector<>();
-    private GL10 gl;
-
-    private boolean whetherUpdate = true;
-    private SampleModel model = new SampleModel();
-
-    private GameSDK(){}
-
-    public boolean startup(Context context) {
-        glView = new GLView(context);
-        renderer = new GLRenderer();
-        glView.setRenderer(renderer);
-        textureManager = new TextureManager(context);
-        objectManager = new GameObjectManager();
-        objectFactory = new ObjectFactory(objectManager);
-
-        return true;
+    private GameSDK() {
     }
 
-    public boolean init() {
-        changeScene();
-
-        objectManager.initGameObjects();
-        new Thread(this).start();
-
-        return true;
-    }
-
-    public boolean uninit() {
-        sdk = null;
-        renderer = null;
-        textureManager = null;
-        objectManager = null;
-
-        return true;
-    }
-
-    public void update() {
-        if (!checkWhetherUpdate()) {
-            return;
-        }
-
-        //更新処理
-        objectManager.updateGameObjects();
-
-        changeWhetherUpdate(false);
-    }
-
-    public void draw(GL10 gl) {
-        for (int i = 0; i < 500; i++) {
-            if (checkWhetherUpdate()) {
-                continue;
-            }
-
-            //描画処理
-            for (Camera c : Camera.getCameraList()) {
-                renderer.beginbRendering(gl, c);
-                objectManager.drawGameObjects();
-
-                model.draw(gl);
-            }
-            break;
-        }
-
-        changeWhetherUpdate(true);
-    }
-
-    public static GameSDK getSDK() {
+    public static GameSDKInterface getSDK() {
         if (sdk == null) {
             sdk = new GameSDK();
         }
@@ -103,38 +21,14 @@ public class GameSDK implements Runnable {
         return sdk;
     }
 
-    public void setGL10(GL10 gl) { this.gl = gl;}
-
-    public void setTexture(int id) { textureManager.setTexture(gl, id); }
-
-    public int getTexture(int id) { return textureManager.getTextureID(id); }
-
-    public GLView getGlView() {
-        return glView;
-    }
-
-    public GLRenderer getRenderer() { return renderer; }
-
-    public GameObjectManager getObjectManager() {
-        return objectManager;
-    }
-
     @Override
-    public void run() {
-        while (true) {
-            update();
-        }
+    public boolean startUp(Context context) {
+        return super.startup(context);
     }
 
-    private boolean checkWhetherUpdate() {
-        synchronized (this) {
-            return whetherUpdate;
-        }
-    }
-
-    private void changeWhetherUpdate(boolean flag) {
-        synchronized (this) {
-            whetherUpdate = flag;
+    public void setScene(SceneInterface ... scenes) {
+        for (SceneInterface scene : scenes) {
+            nextSceneVector.add(scene);
         }
     }
 
@@ -142,7 +36,7 @@ public class GameSDK implements Runnable {
         return renderer.getDisplaySize();
     }
 
-    public GameObject createEmptyObject() {
+    public GameObject createGameObject() {
         return objectFactory.createEmptyObject();
     }
 
@@ -154,24 +48,8 @@ public class GameSDK implements Runnable {
         return objectFactory.createCamera(transform);
     }
 
-    public void setScene(SceneInterface ... scenes) {
-        for (SceneInterface scene : scenes) {
-            nextSceneVector.add(scene);
-        }
-    }
+    public void setParent(GameObject parent, GameObject child) {
+        objectManager.setParent(parent, child);
 
-    private void changeScene() {
-        for (SceneInterface scene : sceneVector) {
-            scene.release();
-            objectManager.allDaleteGameObjects();
-        }
-        sceneVector.clear();
-        sceneVector.addAll(nextSceneVector);
-
-        for (SceneInterface scene : sceneVector) {
-            scene.setup();
-            objectManager.initGameObjects();
-        }
-        nextSceneVector.clear();
     }
 }

@@ -111,14 +111,12 @@ public class GameObject {
     public void setParent(GameObject parent) {
         if (parent == this) return;
 
-        GameObjectManager manager = GameSDK.getSDK().getObjectManager();
-        manager.setParent(parent, this);
+        GameSDK.getSDK().setParent(parent, this);
     }
 
     public void setChild(GameObject child) {
         if (child == null || child == this) return;
 
-        GameObjectManager manager = GameSDK.getSDK().getObjectManager();
-        manager.setParent(this, child);
+        GameSDK.getSDK().setParent(this, child);
     }
 }

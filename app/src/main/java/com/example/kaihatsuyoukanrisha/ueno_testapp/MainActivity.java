@@ -1,20 +1,21 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp;
 
 import android.content.Intent;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLView;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDKInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.TestScene;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView earth;
     private TestSurfaceView surface;
-    private GLView glView;
+    private GLSurfaceView glView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.test);
         text.setText(R.string.change_text);*/
 
-        GameSDK sdk = GameSDK.getSDK();
-        sdk.startup(this);
+        GameSDKInterface sdk = GameSDK.getSDK();
+        sdk.startUp(this);
         sdk.setScene(new TestScene());
-        glView = sdk.getGlView();
+        glView = sdk.getRenderer();
         setContentView(glView);
 
     }

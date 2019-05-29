@@ -1,21 +1,33 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameHandler;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Rect;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class GLRenderer implements GLSurfaceView.Renderer {
-    float lightpos[] = {0.0f, 0.0f, 4.0f, 0.0f};
+public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer {
+    private GameHandler handler;
+    private float lightpos[] = {0.0f, 0.0f, 4.0f, 0.0f};
     private float[] perspective = new float[16];
     private float[] view = new float[16];
     private Point displaySize;
+
+    public GLRenderer(Context context, GameHandler handler) {
+        super(context);
+        setRenderer(this);
+        this.handler = handler;
+    }
+
+    public void uninit() {
+        handler = null;
+    }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -45,15 +57,13 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         displaySize = new Point(width, height);
 
-        GameSDK sdk = GameSDK.getSDK();
-        sdk.setGL10(gl);
-        sdk.init();
+        handler.setGL10(gl);
+        handler.init();
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        GameSDK sdk = GameSDK.getSDK();
-        sdk.draw(gl);
+        handler.draw(gl);
     }
 
     public float[] getPerspective() { return perspective; }

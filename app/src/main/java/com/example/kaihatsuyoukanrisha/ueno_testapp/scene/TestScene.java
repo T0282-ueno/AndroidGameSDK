@@ -1,7 +1,8 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.scene;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Vec3;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDKInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
 
 public class TestScene extends SceneInterface {
 
@@ -11,7 +12,10 @@ public class TestScene extends SceneInterface {
 
     @Override
     public void setup() {
-        sdk.createCamera(new Transform(new Vec3(0, 0, 1.0f), new Vec3(0,0,0), new Vec3(1,1,1)));
+        GameSDKInterface sdk = GameSDK.getSDK();
+
+        GameObject camera = sdk.createCamera();
+        camera.transform.pos.z -= 3.0f;
     }
 
     @Override
