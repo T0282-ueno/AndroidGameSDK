@@ -36,7 +36,7 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
         return renderer.getDisplaySize();
     }
 
-    public GameObject createGameObject() {
+    public GameObject createEmptyGameObject() {
         return objectFactory.createEmptyObject();
     }
 

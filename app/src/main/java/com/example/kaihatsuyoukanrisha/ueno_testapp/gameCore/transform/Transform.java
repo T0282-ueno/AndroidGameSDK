@@ -1,6 +1,6 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform;
 
-public class Transform {
+abstract public class Transform {
     public Vec3 pos;
     public Vec3 rot;
     public Vec3 size;
@@ -16,4 +16,12 @@ public class Transform {
         this.rot = rot;
         this.size = scale;
     }
+
+    abstract public Vec3 getAxisX();
+
+    abstract public void calcMatrix();
+
+    abstract public float[] getMatrix();
+
+    abstract public void multiplyMatrix(float[] matrix);
 }

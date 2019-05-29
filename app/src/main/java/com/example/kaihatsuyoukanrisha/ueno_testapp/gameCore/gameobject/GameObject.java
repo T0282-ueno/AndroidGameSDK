@@ -2,19 +2,22 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.MeshInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.GLTransform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
-    public Transform transform = new Transform();
+    public Transform transform = new GLTransform();
     public String name;
     public String tag;
     public int layer;
     private GameObject parent;
     private List<GameObject> children = new ArrayList<>();
     private List<ComponentInterface> componentList = new ArrayList<>();
+    private List<MeshInterface> meshList = new ArrayList<>();
     private GameObjectManager manager;
 
     //Love Friend Style
@@ -81,8 +84,18 @@ public class GameObject {
         }
     }
 
-    private void draw() {
+    private void updateTransform() {
+        transform.calcMatrix();
 
+        if (parent != null) {
+            transform.multiplyMatrix(parent.transform.getMatrix());
+        }
+    }
+
+    private void draw() {
+        for (MeshInterface m : meshList) {
+            m.draw();
+        }
     }
 
     public <T extends ComponentInterface> T getComponent() {
@@ -102,6 +115,11 @@ public class GameObject {
 
     public void addComponent(ComponentInterface component) {
         componentList.add(component);
+    }
+
+    public void addComponent(MeshInterface mesh) {
+        meshList.add(mesh);
+        addComponent((ComponentInterface)mesh);
     }
 
     public final GameObject getParent() { return parent; }

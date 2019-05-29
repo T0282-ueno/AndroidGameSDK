@@ -10,7 +10,7 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
 public interface GameSDKInterface {
     public boolean startUp(Context context);
-    public GameObject createGameObject();
+    public GameObject createEmptyGameObject();
     public GameObject createCamera();
     public void setParent(GameObject parent, GameObject child);
     public void setScene(SceneInterface... scenes);

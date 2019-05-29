@@ -2,13 +2,15 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform;
 
 import android.opengl.Matrix;
 
-import javax.microedition.khronos.opengles.GL10;
-
 public class GLTransform extends Transform {
     private float[] worldMatrix = new float[16];
     private float[] transMtx = new float[16];
     private float[] rotateMtx = new float[16];
     private float[] scaleMtx = new float[16];
+
+    public GLTransform() {
+        super();
+    }
 
     public GLTransform(Vec3 pos, Vec3 rot, Vec3 size) {
         super(pos, rot, size);
@@ -17,7 +19,7 @@ public class GLTransform extends Transform {
 
     public Vec3 getAxisX() { return new Vec3(worldMatrix[0], worldMatrix[1], worldMatrix[2]); }
 
-    public void calcMatrix(GL10 gl) {
+    public void calcMatrix() {
         Matrix.setIdentityM(transMtx, 0);
         Matrix.setIdentityM(rotateMtx, 0);
         Matrix.setIdentityM(scaleMtx, 0);
@@ -30,6 +32,11 @@ public class GLTransform extends Transform {
     }
 
     public float[] getMatrix() { return worldMatrix;}
+
+    @Override
+    public void multiplyMatrix(float[] matrix) {
+        Matrix.multiplyMM(worldMatrix, 0, worldMatrix, 0, matrix, 0);
+    }
 
     private float[] rotateMatrix() {
         float[] rotX = new float[16];
