@@ -71,7 +71,7 @@ public class Board extends MeshInterface {
         //初期行列保存
         gl.glPushMatrix();
 
-        gl.glLoadMatrixf(object.transform.getMatrix(), 0);
+        gl.glMultMatrixf(object.transform.getMatrix(), 0);
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, buffer);

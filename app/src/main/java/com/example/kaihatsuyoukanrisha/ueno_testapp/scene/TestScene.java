@@ -17,11 +17,13 @@ public class TestScene extends SceneInterface {
         GameSDKInterface sdk = GameSDK.getSDK();
 
         GameObject camera = sdk.createCamera();
-        camera.transform.pos.z -= 3.0f;
+        camera.transform.pos.z = 100.0f;
+        camera.transform.pos.x = 3.0f;
+
 
         GameObject object = sdk.createEmptyGameObject();
-        object.transform.pos.z -= 3.0f;
-        object.transform.pos.x -= 0.3f;
+        //object.transform.pos.z -= 3.0f;
+        //object.transform.pos.x -= 0.3f;
         object.addComponent(new Board(object, R.drawable.alien_ufo));
     }
 

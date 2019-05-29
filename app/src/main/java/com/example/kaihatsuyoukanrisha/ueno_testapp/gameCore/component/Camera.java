@@ -25,7 +25,7 @@ public class Camera extends ComponentInterface {
         setViewport(new Rect(0, displaySize.x, displaySize.y, 0));
         Matrix.setIdentityM(viewMatrix, 0);
         Matrix.setIdentityM(projectionMatrix, 0);
-        at = new Vec3(0,0,0);
+        at = new Vec3(0,0,-1);
         up = new Vec3(0,1,0);
         fovy = 90.f;
         GameSDK.getSDK().setCamera(this);
@@ -43,7 +43,7 @@ public class Camera extends ComponentInterface {
                 pos.x, pos.y, pos.z,
                 at.x, at.y, at.z,
                 up.x, up.y, up.z);
-
+        ;
         Matrix.perspectiveM(projectionMatrix, 0, fovy, aspect, 0.01f, 1000.0f);
     }
 
