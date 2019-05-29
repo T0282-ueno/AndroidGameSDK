@@ -9,6 +9,8 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class GameObject {
     public Transform transform = new GLTransform();
     public String name;
@@ -24,7 +26,7 @@ public class GameObject {
     static class FriendGameObject extends GameObject {
         //アクセスを許すクラス
         private final String[] permissionClass = {
-            "com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager$"
+            "com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObjectManager$"
         };
 
         protected FriendGameObject() {
@@ -47,8 +49,10 @@ public class GameObject {
             object.update();
         }
 
-        protected void draw(GameObject object) {
-            object.draw();
+        protected void updateTransform(GameObject object) { object.updateTransform(); }
+
+        protected void draw(GameObject object, GL10 gl) {
+            object.draw(gl);
         }
     }
 
@@ -92,9 +96,9 @@ public class GameObject {
         }
     }
 
-    private void draw() {
+    private void draw(GL10 gl) {
         for (MeshInterface m : meshList) {
-            m.draw();
+            m.draw(gl);
         }
     }
 

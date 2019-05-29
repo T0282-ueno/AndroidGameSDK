@@ -44,12 +44,18 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
         return objectFactory.createCamera();
     }
 
+    public void deleteObject(GameObject object) { objectManager.addGarbageObject(object); }
+
     public GameObject createCamera(Transform transform) {
         return objectFactory.createCamera(transform);
     }
 
     public void setParent(GameObject parent, GameObject child) {
         objectManager.setParent(parent, child);
+    }
 
+    @Override
+    public int getTextureID(int id) {
+        return textureManager.getTextureID(id);
     }
 }

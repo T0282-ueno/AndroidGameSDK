@@ -76,7 +76,7 @@ public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer 
         return result;
     }
 
-    public void beginbRendering(GL10 gl, Camera c) {
+    public void beginRendering(GL10 gl, Camera c) {
         //ビューポート
         Rect rect = c.getViewport();
         gl.glViewport(rect.left, rect.top, rect.right, rect.bottom);

@@ -10,6 +10,8 @@ public class GLTransform extends Transform {
 
     public GLTransform() {
         super();
+        Matrix.setIdentityM(worldMatrix, 0);
+
     }
 
     public GLTransform(Vec3 pos, Vec3 rot, Vec3 size) {
@@ -44,6 +46,9 @@ public class GLTransform extends Transform {
         float[] rotZ = new float[16];
         float[] result = new float[16];
 
+        Matrix.setIdentityM(rotX, 0);
+        Matrix.setIdentityM(rotY, 0);
+        Matrix.setIdentityM(rotZ, 0);
         Matrix.rotateM(rotX,0,rot.x, 1.0f, 0.0f, 0.0f);
         Matrix.rotateM(rotY,0,rot.y, 0.0f, 1.0f, 0.0f);
         Matrix.rotateM(rotZ,0,rot.z, 0.0f, 0.0f, 1.0f);

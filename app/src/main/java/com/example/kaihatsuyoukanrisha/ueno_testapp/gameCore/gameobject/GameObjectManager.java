@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class GameObjectManager {
     private List<GameObject> objectList = new ArrayList<>();
     private Queue<GameObject> workObject = new ArrayDeque<>();
@@ -34,8 +36,10 @@ public class GameObjectManager {
             super.update(object);
         }
 
-        protected void draw(GameObject object) {
-            super.draw(object);
+        protected void updateTransform(GameObject object) { super.updateTransform(object); }
+
+        protected void draw(GameObject object, GL10 gl) {
+            super.draw(object, gl);
         }
     }
 
@@ -67,13 +71,28 @@ public class GameObjectManager {
         cleanGarbageObject();
     }
 
-    public void drawGameObjects() {
+    public void updateTransform() {
         for (GameObject object : objectList) {
             workObject.add(object);
 
             while (!workObject.isEmpty()) {
                 GameObject work = workObject.poll();
-                objectBridge.draw(work);
+                objectBridge.updateTransform(work);
+
+                workObject.addAll(work.getChildren());
+            }
+        }
+
+        cleanGarbageObject();
+    }
+
+    public void drawGameObjects(GL10 gl) {
+        for (GameObject object : objectList) {
+            workObject.add(object);
+
+            while (!workObject.isEmpty()) {
+                GameObject work = workObject.poll();
+                objectBridge.draw(work, gl);
 
                 workObject.addAll(work.getChildren());
             }

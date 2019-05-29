@@ -3,7 +3,6 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
 
 import android.content.Context;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.SampleModel;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.factory.ObjectFactory;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObjectManager;
@@ -28,7 +27,6 @@ public class GameHandler implements Runnable {
 
     private GL10 gl;
     private boolean whetherUpdate = true;
-    private SampleModel model = new SampleModel();
 
     protected GameHandler() {}
 
@@ -44,7 +42,6 @@ public class GameHandler implements Runnable {
     public boolean init() {
         changeScene();
 
-        objectManager.initGameObjects();
         new Thread(this).start();
 
         return true;
@@ -67,6 +64,8 @@ public class GameHandler implements Runnable {
         //更新処理
         objectManager.updateGameObjects();
 
+        objectManager.updateTransform();
+
         changeWhetherUpdate(false);
     }
 
@@ -78,10 +77,8 @@ public class GameHandler implements Runnable {
 
             //描画処理
             for (Camera c : cameraList) {
-                renderer.beginbRendering(gl, c);
-                objectManager.drawGameObjects();
-
-                model.draw(gl);
+                renderer.beginRendering(gl, c);
+                objectManager.drawGameObjects(gl);
             }
             break;
         }

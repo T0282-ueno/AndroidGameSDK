@@ -1,7 +1,9 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.scene;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.R;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDKInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.Board;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 
 public class TestScene extends SceneInterface {
@@ -16,6 +18,11 @@ public class TestScene extends SceneInterface {
 
         GameObject camera = sdk.createCamera();
         camera.transform.pos.z -= 3.0f;
+
+        GameObject object = sdk.createEmptyGameObject();
+        object.transform.pos.z -= 3.0f;
+        object.transform.pos.x -= 0.3f;
+        object.addComponent(new Board(object, R.drawable.alien_ufo));
     }
 
     @Override

@@ -12,10 +12,12 @@ public interface GameSDKInterface {
     public boolean startUp(Context context);
     public GameObject createEmptyGameObject();
     public GameObject createCamera();
+    public void deleteObject(GameObject object);
     public void setParent(GameObject parent, GameObject child);
     public void setScene(SceneInterface... scenes);
     public Point getDisplaySize();
     public GLRenderer getRenderer();
     public void setCamera(Camera camera);
     public void removeCamera(Camera camera);
+    public int getTextureID(int id);
 }
