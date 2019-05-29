@@ -3,7 +3,7 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.manager.TextureManager;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager.TextureManager;
 
 import javax.microedition.khronos.opengles.GL10;
 

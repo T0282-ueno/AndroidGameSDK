@@ -1,15 +1,12 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component;
 
 import android.graphics.Point;
 import android.opengl.Matrix;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Rect;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Vec3;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Rect;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Vec3;
 
 import static java.lang.StrictMath.abs;
 
@@ -21,7 +18,6 @@ public class Camera extends ComponentInterface {
     public Vec3 up;
     public float fovy;
     private float aspect;
-    private static List<Camera> cameraList = new ArrayList<>();
 
     public Camera(GameObject object) {
         super(object);
@@ -32,7 +28,7 @@ public class Camera extends ComponentInterface {
         at = new Vec3(0,0,0);
         up = new Vec3(0,1,0);
         fovy = 90.f;
-        cameraList.add(this);
+        GameSDK.getSDK().setCamera(this);
     }
 
     @Override
@@ -58,7 +54,7 @@ public class Camera extends ComponentInterface {
         viewport = null;
         at = null;
         up = null;
-        cameraList.remove(this);
+        GameSDK.getSDK().removeCamera(this);
     }
 
     public float[] getViewMatrix() { return viewMatrix; }
@@ -82,9 +78,5 @@ public class Camera extends ComponentInterface {
 
     public void setFovy(float fovy) {
         this.fovy = fovy;
-    }
-
-    public static final List<Camera> getCameraList() {
-        return cameraList;
     }
 }

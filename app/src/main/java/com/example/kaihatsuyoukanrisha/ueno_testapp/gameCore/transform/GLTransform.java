@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform;
 
 import android.opengl.Matrix;
 

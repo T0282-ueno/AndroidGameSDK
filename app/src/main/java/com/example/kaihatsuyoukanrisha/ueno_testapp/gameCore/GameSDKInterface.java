@@ -1,10 +1,11 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
 
 import android.content.Context;
 import android.graphics.Point;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLRenderer;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl.GLRenderer;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
 public interface GameSDKInterface {
@@ -15,4 +16,6 @@ public interface GameSDKInterface {
     public void setScene(SceneInterface... scenes);
     public Point getDisplaySize();
     public GLRenderer getRenderer();
+    public void setCamera(Camera camera);
+    public void removeCamera(Camera camera);
 }

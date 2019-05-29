@@ -1,6 +1,6 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 
 abstract public class ComponentInterface {
     public GameObject object;

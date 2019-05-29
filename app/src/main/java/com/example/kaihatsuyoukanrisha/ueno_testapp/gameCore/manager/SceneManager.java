@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.manager;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 

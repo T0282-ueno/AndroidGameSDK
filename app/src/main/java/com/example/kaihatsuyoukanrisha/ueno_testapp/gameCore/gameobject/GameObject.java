@@ -1,8 +1,8 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.ComponentInterface;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,13 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl;
 
 import android.content.Context;
 import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameHandler;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Rect;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameHandler;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Rect;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

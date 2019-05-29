@@ -1,9 +1,9 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.factory;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObjectManager;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 
 public class ObjectFactory {
     private GameObjectManager manager;

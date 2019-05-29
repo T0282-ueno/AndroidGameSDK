@@ -1,16 +1,18 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
 
 
 import android.content.Context;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.SampleModel;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.component.Camera;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.factory.ObjectFactory;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObjectManager;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.manager.TextureManager;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl.GLRenderer;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.factory.ObjectFactory;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObjectManager;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager.TextureManager;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl.GLRenderer;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -20,6 +22,7 @@ public class GameHandler implements Runnable {
     protected TextureManager textureManager;
     protected GameObjectManager objectManager;
     protected ObjectFactory objectFactory = null;
+    protected List<Camera> cameraList = new ArrayList<>();
     protected Vector<SceneInterface> sceneVector = new Vector<>();
     protected Vector<SceneInterface> nextSceneVector = new Vector<>();
 
@@ -74,7 +77,7 @@ public class GameHandler implements Runnable {
             }
 
             //描画処理
-            for (Camera c : Camera.getCameraList()) {
+            for (Camera c : cameraList) {
                 renderer.beginbRendering(gl, c);
                 objectManager.drawGameObjects();
 
@@ -87,6 +90,10 @@ public class GameHandler implements Runnable {
     }
 
     public void setGL10(GL10 gl) { this.gl = gl;}
+
+    public void setCamera(Camera camera) { cameraList.add(camera); }
+
+    public void removeCamera(Camera camera) { cameraList.remove(camera); }
 
     protected void setTexture(int id) { textureManager.setTexture(gl, id); }
 

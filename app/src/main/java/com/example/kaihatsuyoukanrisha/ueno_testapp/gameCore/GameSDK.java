@@ -1,10 +1,10 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
 
 import android.content.Context;
 import android.graphics.Point;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject.GameObject;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.transform.Transform;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
 public class GameSDK extends GameHandler implements GameSDKInterface {

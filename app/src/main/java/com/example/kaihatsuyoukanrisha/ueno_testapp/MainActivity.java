@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.GameSDKInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDKInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.TestScene;
 
 public class MainActivity extends AppCompatActivity {

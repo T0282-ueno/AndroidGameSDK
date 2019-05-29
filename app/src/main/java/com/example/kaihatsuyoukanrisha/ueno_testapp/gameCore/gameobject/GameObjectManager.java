@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.gameobject;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

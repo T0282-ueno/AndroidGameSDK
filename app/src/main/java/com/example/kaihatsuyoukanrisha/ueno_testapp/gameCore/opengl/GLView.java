@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameSrc.opengl;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
