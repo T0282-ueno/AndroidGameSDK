@@ -16,8 +16,6 @@ public class Camera extends ComponentInterface {
     private float[] viewMatrix = new float[16];
     private Rect viewport;
     private Rectf frustumRect = new Rectf(0,0,0,0);
-    public Vec3 at;
-    public Vec3 up;
     public float fovy;
     private float aspect;
     private float near;
@@ -27,8 +25,6 @@ public class Camera extends ComponentInterface {
         super(object);
         Matrix.setIdentityM(viewMatrix, 0);
         Matrix.setIdentityM(projectionMatrix, 0);
-        at = new Vec3(0,0,-1);
-        up = new Vec3(0,1,0);
         fovy = 90.f;
         near = 0.01f;
         far = 1000.0f;
@@ -45,7 +41,9 @@ public class Camera extends ComponentInterface {
 
     @Override
     public void update() {
-        Vec3 pos = object.transform.pos;
+        Vec3 pos = object.transform.getWorldPos();
+        Vec3 at = object.transform.getAxisZ().addition(pos);
+        Vec3 up = object.transform.getAxisY();
         Matrix.setLookAtM(viewMatrix, 0,
                 pos.x, pos.y, pos.z,
                 at.x, at.y, at.z,
@@ -57,14 +55,12 @@ public class Camera extends ComponentInterface {
         projectionMatrix = null;
         viewMatrix = null;
         viewport = null;
-        at = null;
-        up = null;
         GameSDK.getSDK().removeCamera(this);
     }
 
     public float[] getViewMatrix() { return viewMatrix; }
 
-    public float[] getProjectionMatrix() { return  projectionMatrix; }
+    public float[] getProjectionMatrix() { return projectionMatrix; }
 
     public final Rect getViewport() {
         return viewport;

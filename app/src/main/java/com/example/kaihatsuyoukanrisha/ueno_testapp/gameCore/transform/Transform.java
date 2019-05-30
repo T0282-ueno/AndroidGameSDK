@@ -19,9 +19,15 @@ abstract public class Transform {
 
     abstract public Vec3 getAxisX();
 
+    abstract public Vec3 getAxisY();
+
+    abstract public Vec3 getAxisZ();
+
     abstract public void calcMatrix();
 
     abstract public float[] getMatrix();
 
     abstract public void multiplyMatrix(float[] matrix);
+
+    abstract public Vec3 getWorldPos();
 }

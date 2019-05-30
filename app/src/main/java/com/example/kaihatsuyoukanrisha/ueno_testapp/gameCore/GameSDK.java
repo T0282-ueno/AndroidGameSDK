@@ -24,7 +24,7 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
     }
 
     @Override
-    public boolean startUp(Context context) {
+    public boolean startup(Context context) {
         return super.startup(context);
     }
 

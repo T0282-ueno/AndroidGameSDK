@@ -17,10 +17,18 @@ public class Vec3 {
     }
 
     public Vec3 multiplicatio(Vec3 vec) {
-        return new Vec3(x * vec.x, y * vec.y, z * vec.z);
+        return multiplivation(this, vec);
+    }
+
+    public Vec3 addition(Vec3 vec) {
+        return addition(this, vec);
     }
 
     public static Vec3 multiplivation(Vec3 vec1, Vec3 vec2) {
         return new Vec3(vec1.x * vec2.x, vec1.y * vec2.y, vec1.z * vec2.z);
+    }
+
+    public static Vec3 addition(Vec3 vec1, Vec3 vec2) {
+        return new Vec3(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z);
     }
 }

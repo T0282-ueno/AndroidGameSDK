@@ -11,7 +11,7 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 import javax.microedition.khronos.opengles.GL10;
 
 public interface GameSDKInterface {
-    public boolean startUp(Context context);
+    public boolean startup(Context context);
     public GameObject createEmptyGameObject();
     public GameObject createCamera();
     public void deleteObject(GameObject object);

@@ -33,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
         text.setText(R.string.change_text);*/
 
         GameSDKInterface sdk = GameSDK.getSDK();
-        sdk.startUp(this);
+        sdk.startup(this);
         sdk.setScene(new TestScene());
         glView = sdk.getRenderer();
         setContentView(glView);
-
     }
 
     @Override

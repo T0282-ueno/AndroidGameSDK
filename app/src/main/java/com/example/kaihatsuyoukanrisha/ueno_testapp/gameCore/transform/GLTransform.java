@@ -21,6 +21,10 @@ public class GLTransform extends Transform {
 
     public Vec3 getAxisX() { return new Vec3(worldMatrix[0], worldMatrix[1], worldMatrix[2]); }
 
+    public Vec3 getAxisY() { return new Vec3(worldMatrix[4], worldMatrix[5], worldMatrix[6]); }
+
+    public Vec3 getAxisZ() { return new Vec3(worldMatrix[8], worldMatrix[9], worldMatrix[10]); }
+
     public void calcMatrix() {
         Matrix.setIdentityM(transMtx, 0);
         Matrix.setIdentityM(rotateMtx, 0);
@@ -60,5 +64,9 @@ public class GLTransform extends Transform {
         rotZ = null;
 
         return result;
+    }
+
+    public Vec3 getWorldPos() {
+        return new Vec3(worldMatrix[12], worldMatrix[13], worldMatrix[14]);
     }
 }

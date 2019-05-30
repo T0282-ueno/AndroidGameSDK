@@ -62,14 +62,9 @@ public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer 
         handler.setGL10(gl);
         handler.init();
 
-        /*Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_ufo);
-        // テクスチャを生成
-        int textures[] = new int[1];
-        gl.glGenTextures(1, textures, 0);
-        gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-        GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);*/
+        // アルファテスト
+        gl.glEnable(GL10.GL_ALPHA_TEST);
+        gl.glAlphaFunc(GL10.GL_GEQUAL, 0.1f);
     }
 
     @Override
