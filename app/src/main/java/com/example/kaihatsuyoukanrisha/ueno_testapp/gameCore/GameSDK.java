@@ -7,6 +7,8 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObje
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class GameSDK extends GameHandler implements GameSDKInterface {
     private static GameSDK sdk = null;
 
@@ -57,5 +59,18 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
     @Override
     public int getTextureID(int id) {
         return textureManager.getTextureID(id);
+    }
+
+    public boolean loadTexture(int imageID) {
+        return textureManager.setTexture(imageID);
+    }
+
+    public void deleteAllTexture() {
+        textureManager.release();
+    }
+
+    @Override
+    public GL10 getGL() {
+        return gl;
     }
 }

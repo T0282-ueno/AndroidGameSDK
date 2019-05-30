@@ -25,7 +25,7 @@ public class GameHandler implements Runnable {
     protected Vector<SceneInterface> sceneVector = new Vector<>();
     protected Vector<SceneInterface> nextSceneVector = new Vector<>();
 
-    private GL10 gl;
+    protected GL10 gl;
     private boolean whetherUpdate = true;
 
     protected GameHandler() {}
@@ -91,8 +91,6 @@ public class GameHandler implements Runnable {
     public void setCamera(Camera camera) { cameraList.add(camera); }
 
     public void removeCamera(Camera camera) { cameraList.remove(camera); }
-
-    protected void setTexture(int id) { textureManager.setTexture(gl, id); }
 
     protected int getTexture(int id) { return textureManager.getTextureID(id); }
 

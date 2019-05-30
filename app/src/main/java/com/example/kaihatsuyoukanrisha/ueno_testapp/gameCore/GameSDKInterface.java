@@ -8,6 +8,8 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObje
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl.GLRenderer;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public interface GameSDKInterface {
     public boolean startUp(Context context);
     public GameObject createEmptyGameObject();
@@ -20,4 +22,7 @@ public interface GameSDKInterface {
     public void setCamera(Camera camera);
     public void removeCamera(Camera camera);
     public int getTextureID(int id);
+    public boolean loadTexture(int imageID);
+    public void deleteAllTexture();
+    public GL10 getGL();
 }

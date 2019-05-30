@@ -32,6 +32,7 @@ public class Camera extends ComponentInterface {
         fovy = 90.f;
         near = 0.01f;
         far = 1000.0f;
+
         Point displaySize = GameSDK.getSDK().getDisplaySize();
         setViewport(new Rect(0, displaySize.x, displaySize.y, 0));
         GameSDK.getSDK().setCamera(this);

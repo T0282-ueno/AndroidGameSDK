@@ -29,8 +29,8 @@ public class MyGLView extends GLSurfaceView {
         setRenderer(renderer);
 
         this.gl = renderer.getGL();
-        textureManager = new TextureManager(context);
-        textureManager.setTexture(gl, R.drawable.space_kaseijin);
+        //textureManager = new TextureManager(context);
+        //textureManager.setTexture(gl, R.drawable.space_kaseijin);
 
         //renderer.setAxis();
     }

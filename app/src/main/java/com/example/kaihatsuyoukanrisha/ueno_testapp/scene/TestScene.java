@@ -15,20 +15,22 @@ public class TestScene extends SceneInterface {
     @Override
     public void setup() {
         GameSDKInterface sdk = GameSDK.getSDK();
+        sdk.loadTexture(R.drawable.alien_ufo);
+        sdk.loadTexture(R.drawable.space_kaseijin);
 
         GameObject camera = sdk.createCamera();
         camera.transform.pos.z = 10.0f;
-        camera.transform.pos.x = 10.0f;
-
+        //camera.transform.pos.x = 10.0f;
 
         GameObject object = sdk.createEmptyGameObject();
         //object.transform.pos.z -= 3.0f;
         //object.transform.pos.x -= 0.3f;
-        object.addComponent(new Board(object, R.drawable.alien_ufo));
+        object.addComponent(new Board(object, sdk.getTextureID(R.drawable.fantasy_flatwoods_monster)));
     }
 
     @Override
     public void release() {
-
+        GameSDKInterface sdk = GameSDK.getSDK();
+        sdk.deleteAllTexture();
     }
 }

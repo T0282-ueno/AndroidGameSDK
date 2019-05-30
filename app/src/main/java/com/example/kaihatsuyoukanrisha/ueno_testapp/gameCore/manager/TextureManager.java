@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +21,9 @@ public class TextureManager {
         this.context = context;
     }
 
-    public boolean setTexture(GL10 gl, int imageID) {
+    public boolean setTexture(int imageID) {
+        GL10 gl = GameSDK.getSDK().getGL();
+
         if (textureMap.containsKey(imageID)) {
             return false;
         }
@@ -43,10 +47,23 @@ public class TextureManager {
     }
 
     public void release() {
+        GL10 gl = GameSDK.getSDK().getGL();
+        int[] texs = new int[textureMap.size()];
+        int i = 0;
+        for (int id : textureMap.keySet()) {
+            texs[i] = id;
+            i++;
+        }
+
+        gl.glDeleteTextures(textureMap.size(), texs, 0);
         textureMap = null;
     }
 
     public int getTextureID(int imageID) {
+        if (!textureMap.containsKey(imageID)) {
+            setTexture(imageID);
+        }
+
         return textureMap.get(imageID);
     }
 }

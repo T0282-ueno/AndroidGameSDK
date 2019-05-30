@@ -79,16 +79,17 @@ public class Board extends MeshInterface {
         gl.glEnableClientState(GL10.GL_NORMAL_ARRAY);
         gl.glNormalPointer(GL10.GL_FLOAT, 0, normalBuffer);
 
-        /*
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
 
+
         if (textuerID != -1) {
             gl.glBindTexture(GL10.GL_TEXTURE_2D, textuerID);
+            gl.glEnable(GL10.GL_TEXTURE_2D);
         }
         else {
             gl.glDisable(GL10.GL_TEXTURE_2D);
-        }*/
+        }
 
         gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, 4);
 
