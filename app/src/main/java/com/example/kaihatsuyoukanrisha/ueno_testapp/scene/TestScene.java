@@ -17,8 +17,8 @@ public class TestScene extends SceneInterface {
         GameSDKInterface sdk = GameSDK.getSDK();
 
         GameObject camera = sdk.createCamera();
-        camera.transform.pos.z = 100.0f;
-        camera.transform.pos.x = 3.0f;
+        camera.transform.pos.z = 10.0f;
+        camera.transform.pos.x = 10.0f;
 
 
         GameObject object = sdk.createEmptyGameObject();

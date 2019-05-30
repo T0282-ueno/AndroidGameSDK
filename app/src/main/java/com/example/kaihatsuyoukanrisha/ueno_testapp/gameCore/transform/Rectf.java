@@ -1,21 +1,20 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform;
 
-public class Rect {
-    public int top, right, bottom, left;
+public class Rectf {
+    public float top, right, bottom, left;
 
-    public Rect(int top, int right, int bottom, int left) {
+    public Rectf(float top, float right, float bottom, float left) {
         this.top = top;
         this.bottom = bottom;
         this.right = right;
         this.left = left;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return right - left;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return bottom - top;
     }
 }
-

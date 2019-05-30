@@ -6,6 +6,7 @@ import android.opengl.Matrix;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Rect;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Rectf;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Vec3;
 
 import static java.lang.StrictMath.abs;
@@ -14,20 +15,25 @@ public class Camera extends ComponentInterface {
     private float[] projectionMatrix = new float[16];
     private float[] viewMatrix = new float[16];
     private Rect viewport;
+    private Rectf frustumRect = new Rectf(0,0,0,0);
     public Vec3 at;
     public Vec3 up;
     public float fovy;
     private float aspect;
+    private float near;
+    private float far;
 
     public Camera(GameObject object) {
         super(object);
-        Point displaySize = GameSDK.getSDK().getDisplaySize();
-        setViewport(new Rect(0, displaySize.x, displaySize.y, 0));
         Matrix.setIdentityM(viewMatrix, 0);
         Matrix.setIdentityM(projectionMatrix, 0);
         at = new Vec3(0,0,-1);
         up = new Vec3(0,1,0);
         fovy = 90.f;
+        near = 0.01f;
+        far = 1000.0f;
+        Point displaySize = GameSDK.getSDK().getDisplaySize();
+        setViewport(new Rect(0, displaySize.x, displaySize.y, 0));
         GameSDK.getSDK().setCamera(this);
     }
 
@@ -43,8 +49,6 @@ public class Camera extends ComponentInterface {
                 pos.x, pos.y, pos.z,
                 at.x, at.y, at.z,
                 up.x, up.y, up.z);
-        ;
-        Matrix.perspectiveM(projectionMatrix, 0, fovy, aspect, 0.01f, 1000.0f);
     }
 
     @Override
@@ -70,6 +74,8 @@ public class Camera extends ComponentInterface {
         viewport = rect;
         Point size = getViewPortSize();
         aspect = (float)size.x / size.y;
+
+        Matrix.perspectiveM(projectionMatrix, 0, fovy, aspect, near, far);
     }
 
     public Point getViewPortSize() {
@@ -78,5 +84,6 @@ public class Camera extends ComponentInterface {
 
     public void setFovy(float fovy) {
         this.fovy = fovy;
+        Matrix.perspectiveM(projectionMatrix, 0, fovy, aspect, near, far);
     }
 }
