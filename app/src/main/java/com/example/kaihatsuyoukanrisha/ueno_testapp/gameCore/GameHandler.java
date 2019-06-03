@@ -24,6 +24,7 @@ public class GameHandler implements Runnable {
     protected List<Camera> cameraList = new ArrayList<>();
     protected Vector<SceneInterface> sceneVector = new Vector<>();
     protected Vector<SceneInterface> nextSceneVector = new Vector<>();
+    protected Context context;
 
     protected GL10 gl;
     private boolean whetherUpdate = true;
@@ -35,6 +36,7 @@ public class GameHandler implements Runnable {
         textureManager = new TextureManager(context);
         objectManager = new GameObjectManager();
         objectFactory = new ObjectFactory(objectManager);
+        this.context = context;
 
         return true;
     }

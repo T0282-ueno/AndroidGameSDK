@@ -126,6 +126,12 @@ public class GameObject {
         addComponent((ComponentInterface)mesh);
     }
 
+    public void deleteComponent(ComponentInterface component) {
+        if (component == null) return;
+
+        GameSDK.getSDK().deleteComponent(component);
+    }
+
     public final GameObject getParent() { return parent; }
 
     public final List<GameObject> getChildren() { return children; }

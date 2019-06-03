@@ -3,6 +3,7 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.scene;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.R;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.Board;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.script.CameraController;
 
 public class TestScene extends SceneInterface {
 
@@ -16,6 +17,7 @@ public class TestScene extends SceneInterface {
         sdk.loadTexture(R.drawable.space_kaseijin);
 
         GameObject camera = sdk.createCamera();
+        camera.addComponent(new CameraController(camera));
         camera.transform.pos.z = 3.0f;
         camera.transform.rot.y = 180.f;
         camera.transform.rot.x = 10.f;

@@ -3,6 +3,7 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
 import android.content.Context;
 import android.graphics.Point;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
@@ -48,6 +49,11 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
 
     public void deleteObject(GameObject object) { objectManager.addGarbageObject(object); }
 
+    @Override
+    public void deleteComponent(ComponentInterface component) {
+        objectManager.addGarbageComponent(component);
+    }
+
     public GameObject createCamera(Transform transform) {
         return objectFactory.createCamera(transform);
     }
@@ -73,4 +79,7 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
     public GL10 getGL() {
         return gl;
     }
+
+    @Override
+    public Context getContext() { return context; }
 }

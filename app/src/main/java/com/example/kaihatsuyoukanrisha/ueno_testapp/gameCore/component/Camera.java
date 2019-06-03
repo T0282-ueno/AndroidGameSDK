@@ -11,7 +11,7 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Vec3;
 
 import static java.lang.StrictMath.abs;
 
-public class Camera extends ComponentInterface {
+public class Camera extends Component {
     private float[] projectionMatrix = new float[16];
     private float[] viewMatrix = new float[16];
     private Rect viewport;

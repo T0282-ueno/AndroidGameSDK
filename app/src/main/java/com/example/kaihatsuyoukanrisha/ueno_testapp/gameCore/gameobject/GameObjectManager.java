@@ -1,5 +1,7 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +15,7 @@ public class GameObjectManager {
     private List<GameObject> objectList = new ArrayList<>();
     private Queue<GameObject> workObject = new ArrayDeque<>();
     private Queue<GameObject> garbageObject = new ArrayDeque<>();
+    private Queue<ComponentInterface> garbageComponent = new ArrayDeque<>();
     public Map<String, Integer> layer = new HashMap<String, Integer>() {
         {
             put("SYSTEM_LAYER",0x0000);
@@ -118,11 +121,20 @@ public class GameObjectManager {
         garbageObject.add(object);
     }
 
+    public void addGarbageComponent(ComponentInterface component) { garbageComponent.add(component); }
+
     private void cleanGarbageObject() {
         for (GameObject object : garbageObject) {
             objectBridge.delete(object);
         }
         garbageObject.clear();
+    }
+
+    private void cleanGarbageComponent() {
+        for (ComponentInterface c : garbageComponent) {
+            c.delete();
+        }
+        garbageComponent.clear();
     }
 
     public void setParent(GameObject parent, GameObject child) {

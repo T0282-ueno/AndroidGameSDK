@@ -1,11 +1,12 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.script;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Component;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 
-public abstract class ScriptInterface extends ComponentInterface {
+public class ScriptInterface extends Component {
     public ScriptInterface(GameObject object) {
         super(object);
+
     }
 
     public void init() {}
@@ -13,7 +14,4 @@ public abstract class ScriptInterface extends ComponentInterface {
     public void update() {}
 
     public void delete() {}
-
-    
-
 }
