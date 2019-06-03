@@ -21,16 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*earth = findViewById(R.id.testImage);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        earth.setTranslationX(dm.widthPixels * 0.5f);
-
-        TextView text = findViewById(R.id.test);
-        text.setText(R.string.change_text);*/
-
         GameSDKInterface sdk = GameSDK.getSDK();
         sdk.startup(this);
         sdk.setScene(new TestScene());
@@ -56,6 +46,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    public void changeActivity(View view){
+    public void changeActivity(View view) {
     }
 }

@@ -125,6 +125,9 @@ public class GameObjectManager {
 
     private void cleanGarbageObject() {
         for (GameObject object : garbageObject) {
+            if (object.getParent() == null) {
+                objectList.remove(object);
+            }
             objectBridge.delete(object);
         }
         garbageObject.clear();

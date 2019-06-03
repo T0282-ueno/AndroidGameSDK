@@ -4,6 +4,7 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.R;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.Board;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.script.CameraController;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.script.CharactorController;
 
 public class TestScene extends SceneInterface {
 
@@ -28,6 +29,7 @@ public class TestScene extends SceneInterface {
         //object.transform.pos.z -= 3.0f;
         //object.transform.pos.x -= 0.3f;
         object.addComponent(new Board(object, sdk.getTextureID(R.drawable.fantasy_flatwoods_monster)));
+        object.addComponent(new CharactorController(object));
     }
 
     @Override
