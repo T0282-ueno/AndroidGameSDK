@@ -17,7 +17,7 @@ public class CameraController extends ScriptInterface {
 
     public void update() {
         if (AndroidInput.hasMove()) {
-            PointF move = AndroidInput.getAmountMovement();
+            PointF move = AndroidInput.getAmountMovement(AndroidInput.TOUCH.ONE);
             object.transform.pos.x += move.x * 0.01f;
             object.transform.pos.y -= move.y * 0.01f;
         }
