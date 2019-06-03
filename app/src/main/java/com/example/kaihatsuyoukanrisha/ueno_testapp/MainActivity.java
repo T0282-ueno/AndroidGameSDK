@@ -1,6 +1,5 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp;
 
-import android.content.Intent;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.TestScene;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView earth;
-    private TestSurfaceView surface;
     private GLSurfaceView glView;
 
     @Override
@@ -59,7 +57,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeActivity(View view){
-        Intent intent = new Intent(this, testActivity.class );
-        startActivity(intent);
     }
 }
