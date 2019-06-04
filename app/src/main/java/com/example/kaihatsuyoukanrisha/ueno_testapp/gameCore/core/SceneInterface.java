@@ -1,11 +1,10 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.scene;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDKInterface;
 
 abstract public class SceneInterface {
     String sceneName;
-    GameSDKInterface sdk;
+    protected GameSDKInterface sdk;
 
     public SceneInterface(String name) {
         this.sceneName = name;

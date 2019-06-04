@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Point;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.GameHandler;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.GameSDKInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.SceneInterface;
 
 import javax.microedition.khronos.opengles.GL10;
 

@@ -1,6 +1,6 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.SceneInterface;
 
 import java.util.HashMap;
 import java.util.Map;

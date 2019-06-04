@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -7,7 +7,6 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ComponentInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl.GLRenderer;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
 import javax.microedition.khronos.opengles.GL10;
 

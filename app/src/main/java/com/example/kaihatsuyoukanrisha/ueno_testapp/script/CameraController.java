@@ -3,6 +3,7 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.script;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.ScriptInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.input.AndroidInput;
 

@@ -2,6 +2,7 @@ package com.example.kaihatsuyoukanrisha.ueno_testapp.scene;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.R;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.Board;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.SceneInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.script.CameraController;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.script.CharactorController;

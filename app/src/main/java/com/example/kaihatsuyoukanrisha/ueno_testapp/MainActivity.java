@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDK;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameSDKInterface;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.GameSDKInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.input.AndroidInput;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.TestScene;
 

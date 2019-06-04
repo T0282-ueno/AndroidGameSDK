@@ -1,4 +1,4 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core;
 
 
 import android.content.Context;
@@ -8,7 +8,6 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.factory.ObjectFacto
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObjectManager;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager.TextureManager;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.opengl.GLRenderer;
-import com.example.kaihatsuyoukanrisha.ueno_testapp.scene.SceneInterface;
 
 import java.util.ArrayList;
 import java.util.List;

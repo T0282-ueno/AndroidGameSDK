@@ -5,7 +5,7 @@ import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.GameHandler;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core.GameHandler;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Rect;
 

@@ -1,6 +1,5 @@
-package com.example.kaihatsuyoukanrisha.ueno_testapp.script;
+package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component;
 
-import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Component;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObject;
 
 public class ScriptInterface extends Component {
