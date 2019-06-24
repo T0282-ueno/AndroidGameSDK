@@ -49,7 +49,9 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
         return objectFactory.createCamera();
     }
 
-    public void deleteObject(GameObject object) { objectManager.addGarbageObject(object); }
+    public void deleteObject(GameObject object) {
+        objectManager.addGarbageObject(object);
+    }
 
     @Override
     public void deleteComponent(ComponentInterface component) {
@@ -69,7 +71,7 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
         return textureManager.getTextureID(id);
     }
 
-    public boolean loadTexture(int imageID) {
+    public boolean loadTexture(final int imageID) {
         return textureManager.setTexture(imageID);
     }
 
@@ -83,5 +85,7 @@ public class GameSDK extends GameHandler implements GameSDKInterface {
     }
 
     @Override
-    public Context getContext() { return context; }
+    public Context getContext() {
+        return context;
+    }
 }

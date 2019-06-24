@@ -5,7 +5,6 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.gameobject.GameObje
 public class ScriptInterface extends Component {
     public ScriptInterface(GameObject object) {
         super(object);
-
     }
 
     public void init() {}

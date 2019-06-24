@@ -13,14 +13,15 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer {
+    private final float[] CLEAR_COLOR = {0.5f, 0.5f, 1.0f, 1.0f};
+    private final float ALPHA_FUNC = 0.1f;
+
     private GameHandler handler;
     private float lightpos[] = {0.0f, 0.0f, 4.0f, 0.0f};
-    private float[] perspective = new float[16];
-    private float[] view = new float[16];
     private Point displaySize;
     private Context context;
 
-    public GLRenderer(Context context, GameHandler handler) {
+    public GLRenderer(final Context context, GameHandler handler) {
         super(context);
         this.context = context;
         setRenderer(this);
@@ -34,7 +35,7 @@ public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         //クリア色
-        gl.glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
+        gl.glClearColor(CLEAR_COLOR[0], CLEAR_COLOR[1], CLEAR_COLOR[2], CLEAR_COLOR[3]);
 
         // デプステスト
         gl.glEnable(GL10.GL_DEPTH_TEST);
@@ -64,22 +65,12 @@ public class GLRenderer extends GLSurfaceView implements GLSurfaceView.Renderer 
 
         // アルファテスト
         gl.glEnable(GL10.GL_ALPHA_TEST);
-        gl.glAlphaFunc(GL10.GL_GEQUAL, 0.1f);
+        gl.glAlphaFunc(GL10.GL_GEQUAL, ALPHA_FUNC);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         handler.draw(gl);
-    }
-
-    public float[] getPerspective() { return perspective; }
-
-    public float[] getView() { return view; }
-
-    public float[] getProjectionView() {
-        float[] result = new float[16];
-        Matrix.multiplyMM(result, 0, perspective, 0, view, 0);
-        return result;
     }
 
     public void beginRendering(GL10 gl, Camera c) {

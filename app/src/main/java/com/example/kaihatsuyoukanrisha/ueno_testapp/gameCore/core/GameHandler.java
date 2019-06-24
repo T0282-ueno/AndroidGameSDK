@@ -1,6 +1,5 @@
 package com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.core;
 
-
 import android.content.Context;
 
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Camera;
@@ -16,6 +15,8 @@ import java.util.Vector;
 import javax.microedition.khronos.opengles.GL10;
 
 public class GameHandler implements Runnable {
+    private static final int TRY_AGAIN = 500;
+
     protected GLRenderer renderer = null;
     protected TextureManager textureManager;
     protected GameObjectManager objectManager;
@@ -30,6 +31,7 @@ public class GameHandler implements Runnable {
 
     protected GameHandler() {}
 
+    //エラークラス作ったほうがよさげ
     public boolean startup(Context context) {
         renderer = new GLRenderer(context, this);
         textureManager = new TextureManager(context);
@@ -62,7 +64,7 @@ public class GameHandler implements Runnable {
             return;
         }
 
-        //更新処理
+        //更新処�?
         objectManager.updateGameObjects();
 
         objectManager.updateTransform();
@@ -71,31 +73,42 @@ public class GameHandler implements Runnable {
     }
 
     public void draw(GL10 gl) {
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < TRY_AGAIN; i++) {
             if (checkWhetherUpdate()) {
                 continue;
             }
 
-            //描画処理
+            //描画処�?
             for (Camera c : cameraList) {
                 renderer.beginRendering(gl, c);
                 objectManager.drawGameObjects(gl);
             }
+
+            changeWhetherUpdate(true);
             break;
         }
 
-        changeWhetherUpdate(true);
     }
 
-    public void setGL10(GL10 gl) { this.gl = gl;}
+    public void setGL10(final GL10 gl) {
+        this.gl = gl;
+    }
 
-    public void setCamera(Camera camera) { cameraList.add(camera); }
+    public void setCamera(Camera camera) {
+        cameraList.add(camera);
+    }
 
-    public void removeCamera(Camera camera) { cameraList.remove(camera); }
+    public void removeCamera(Camera camera) {
+        cameraList.remove(camera);
+    }
 
-    protected int getTexture(int id) { return textureManager.getTextureID(id); }
+    protected int getTexture(int id) {
+        return textureManager.getTextureID(id);
+    }
 
-    public GLRenderer getRenderer() { return renderer; }
+    public GLRenderer getRenderer() {
+        return renderer;
+    }
 
     @Override
     public void run() {

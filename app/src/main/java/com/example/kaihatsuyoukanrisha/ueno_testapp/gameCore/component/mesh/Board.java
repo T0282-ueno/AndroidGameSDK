@@ -12,14 +12,14 @@ public class Board extends MeshInterface {
     private int textuerID;
     private FloatBuffer buffer;         // 頂点バッファ
     private FloatBuffer normalBuffer;   // 法線用バッファ
-    private FloatBuffer textureBuffer;  // テクスチャバッファ
-    private float vertex[] = {
+    private FloatBuffer textureBuffer;  // �?クスチャバッファ
+    private final float vertex[] = {
             0.5f, 0.5f, 0.0f,
             -0.5f, 0.5f, 0.0f,
             0.5f, -0.5f, 0.0f,
             -0.5f, -0.5f, 0.0f
     };
-    private float normal[] = {
+    private final float normal[] = {
             0.0f, 0.0f, 1.0f,
             0.0f, 0.0f, 1.0f,
             0.0f, 0.0f, 1.0f,
@@ -58,7 +58,7 @@ public class Board extends MeshInterface {
         normalBuffer.put(normal);
         normalBuffer.position(0);
 
-        //テクスチャ座標登録
+        //�?クスチャ座標登録
         ByteBuffer tb = ByteBuffer.allocateDirect(uv.length * 4);
         tb.order(ByteOrder.nativeOrder());
         textureBuffer = tb.asFloatBuffer();
@@ -68,7 +68,7 @@ public class Board extends MeshInterface {
 
     @Override
     public void draw(GL10 gl) {
-        //初期行列保存
+        //初期行�?�保�?
         gl.glPushMatrix();
 
         gl.glMultMatrixf(object.transform.getMatrix(), 0);
@@ -93,11 +93,7 @@ public class Board extends MeshInterface {
 
         gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, 4);
 
-        //初期行列吐き出し
+        //初期行�?�吐き�?��?
         gl.glPopMatrix();
-
-        /*if (textuerID == -1) {
-            gl.glEnable(GL10.GL_TEXTURE_2D);
-        }*/
     }
 }

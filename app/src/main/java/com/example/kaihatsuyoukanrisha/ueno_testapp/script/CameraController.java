@@ -23,11 +23,4 @@ public class CameraController extends ScriptInterface {
             object.transform.pos.y -= move.y * 0.01f;
         }
     }
-
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        object.transform.pos.x += distanceX * 0.01f;
-        object.transform.pos.y += distanceY * 0.01f;
-
-        return true;
-    }
 }

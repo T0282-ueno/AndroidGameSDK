@@ -7,11 +7,14 @@ public class GLTransform extends Transform {
     private float[] transMtx = new float[16];
     private float[] rotateMtx = new float[16];
     private float[] scaleMtx = new float[16];
+    private float[] rotX = new float[16];
+    private float[] rotY = new float[16];
+    private float[] rotZ = new float[16];
+    private float[] result = new float[16];
 
     public GLTransform() {
         super();
         Matrix.setIdentityM(worldMatrix, 0);
-
     }
 
     public GLTransform(Vec3 pos, Vec3 rot, Vec3 size) {
@@ -19,11 +22,17 @@ public class GLTransform extends Transform {
         Matrix.setIdentityM(worldMatrix, 0);
     }
 
-    public Vec3 getAxisX() { return new Vec3(worldMatrix[0], worldMatrix[1], worldMatrix[2]); }
+    public Vec3 getAxisX() {
+        return new Vec3(worldMatrix[0], worldMatrix[1], worldMatrix[2]);
+    }
 
-    public Vec3 getAxisY() { return new Vec3(worldMatrix[4], worldMatrix[5], worldMatrix[6]); }
+    public Vec3 getAxisY() {
+        return new Vec3(worldMatrix[4], worldMatrix[5], worldMatrix[6]);
+    }
 
-    public Vec3 getAxisZ() { return new Vec3(worldMatrix[8], worldMatrix[9], worldMatrix[10]); }
+    public Vec3 getAxisZ() {
+        return new Vec3(worldMatrix[8], worldMatrix[9], worldMatrix[10]);
+    }
 
     public void calcMatrix() {
         Matrix.setIdentityM(transMtx, 0);
@@ -37,7 +46,9 @@ public class GLTransform extends Transform {
         Matrix.multiplyMM(worldMatrix, 0, worldMatrix, 0, scaleMtx, 0);
     }
 
-    public float[] getMatrix() { return worldMatrix;}
+    public float[] getMatrix() {
+        return worldMatrix;
+    }
 
     @Override
     public void multiplyMatrix(float[] matrix) {
@@ -45,11 +56,6 @@ public class GLTransform extends Transform {
     }
 
     private float[] rotateMatrix() {
-        float[] rotX = new float[16];
-        float[] rotY = new float[16];
-        float[] rotZ = new float[16];
-        float[] result = new float[16];
-
         Matrix.setIdentityM(rotX, 0);
         Matrix.setIdentityM(rotY, 0);
         Matrix.setIdentityM(rotZ, 0);
@@ -58,11 +64,7 @@ public class GLTransform extends Transform {
         Matrix.rotateM(rotZ,0,rot.z, 0.0f, 0.0f, 1.0f);
         Matrix.multiplyMM(result, 0, rotX, 0, rotY, 0);
         Matrix.multiplyMM(result, 0, result, 0, rotZ, 0);
-
-        rotX = null;
-        rotY = null;
-        rotZ = null;
-
+        
         return result;
     }
 

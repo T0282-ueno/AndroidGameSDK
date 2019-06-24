@@ -5,7 +5,9 @@ import android.view.MotionEvent;
 
 public class AndroidInput {
     static private AndroidInput input = null;
-    static private int[] idIndex = {-1, -1, -1};
+    static private int[] idIndex = {
+        -1, -1, -1
+    };
     static private int oldAction = 0;
     static private int action = 0;
     static private boolean touchOnce;
@@ -13,12 +15,14 @@ public class AndroidInput {
     static private PointF[] touchPos = {
             new PointF(0.f,0.f),
             new PointF(0.f,0.f),
-            new PointF(0.f,0.f)};
+            new PointF(0.f,0.f)
+        };
 
     static private PointF[] oldPos = {
             new PointF(0.f, 0.f),
             new PointF(0.f,0.f),
-            new PointF(0.f,0.f)};
+            new PointF(0.f,0.f)
+        };
 
     static private MotionEvent event;
 
@@ -29,9 +33,13 @@ public class AndroidInput {
 
         private final int id;
 
-        TOUCH(int i) {id = i;}
+        TOUCH(int i) {
+            id = i;
+        }
 
-        private int getInt() {return id;}
+        private int getInt() {
+            return id;
+        }
     }
 
     private AndroidInput() {
@@ -47,13 +55,13 @@ public class AndroidInput {
     }
 
     //タッチされた順番に配列に値が格納されていく
-    static public void setTouchEvent(MotionEvent event) {
+    static public void setTouchEvent(final MotionEvent event) {
         getInput().event = event;
         input.oldAction = input.action;
         input.action = event.getActionMasked();
         downTime = event.getDownTime();
-        int actionIndex = event.getActionIndex();
-        int pointerId = event.getPointerId(actionIndex);
+        final int actionIndex = event.getActionIndex();
+        final int pointerId = event.getPointerId(actionIndex);
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
@@ -109,8 +117,8 @@ public class AndroidInput {
         return new PointF(oldPos[0].x - touchPos[0].x, oldPos[0].y - touchPos[0].y);
     }
 
-    static public PointF getAmountMovement(TOUCH touch) {
-        int index = touch.getInt();
+    static public PointF getAmountMovement(final TOUCH touch) {
+        final int index = touch.getInt();
         return new PointF(oldPos[index].x - touchPos[index].x, oldPos[index].y - touchPos[index].y);
     }
 
@@ -118,7 +126,7 @@ public class AndroidInput {
         return touchPos[0];
     }
 
-    static public PointF getTouchPos(TOUCH touch) {
+    static public PointF getTouchPos(final TOUCH touch) {
         return touchPos[touch.getInt()];
     }
 
@@ -126,28 +134,32 @@ public class AndroidInput {
         return event.getPointerCount();
     }
 
-    static private void releaseIndex(int pointerId) {
+    static private void releaseIndex(final int pointerId) {
         for (int i = 0; i < idIndex.length; i++) {
-            if (idIndex[i] == pointerId) {
-                touchPos[i].x = 0.0f;
-                touchPos[i].y = 0.0f;
-                oldPos[i].x = 0.0f;
-                oldPos[i].y = 0.0f;
-                idIndex[i] = -1;
+            if (idIndex[i] != pointerId) {
+                continue;
             }
+            
+            touchPos[i].x = 0.0f;
+            touchPos[i].y = 0.0f;
+            oldPos[i].x = 0.0f;
+            oldPos[i].y = 0.0f;
+            idIndex[i] = -1;
         }
     }
 
-    static private void addIndex(int pointerId) {
+    static private void addIndex(final int pointerId) {
         for (int i = 0; i < idIndex.length; i++) {
-            if (idIndex[i] == -1) {
-                idIndex[i] = pointerId;
-                int index = event.findPointerIndex(idIndex[i]);
-                touchPos[i].x = event.getX(index);
-                touchPos[i].y = event.getY(index);
-                oldPos[i] = new PointF(touchPos[i].x, touchPos[i].y);
-                return;
+            if (idIndex[i] != -1) {
+                continue;
             }
+            
+            idIndex[i] = pointerId;
+            int index = event.findPointerIndex(idIndex[i]);
+            touchPos[i].x = event.getX(index);
+            touchPos[i].y = event.getY(index);
+            oldPos[i] = new PointF(touchPos[i].x, touchPos[i].y);
+            return;
         }
     }
 

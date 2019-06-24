@@ -24,9 +24,9 @@ public class GameObjectManager {
     };
     private FriendGameObjectBridge objectBridge = new FriendGameObjectBridge();
 
-    //いくよ友達の友達はラブ
+    //�?くよ友達の友達はラ�?
     static class FriendGameObjectBridge extends GameObject.FriendGameObject {
-        //ハートにくっつくたからもん
+        //ハ�?�トにくっつくたからもん
         protected void init(GameObject object) {
             super.init(object);
         }
@@ -39,7 +39,9 @@ public class GameObjectManager {
             super.update(object);
         }
 
-        protected void updateTransform(GameObject object) { super.updateTransform(object); }
+        protected void updateTransform(GameObject object) {
+            super.updateTransform(object);
+        }
 
         protected void draw(GameObject object, GL10 gl) {
             super.draw(object, gl);
@@ -121,7 +123,9 @@ public class GameObjectManager {
         garbageObject.add(object);
     }
 
-    public void addGarbageComponent(ComponentInterface component) { garbageComponent.add(component); }
+    public void addGarbageComponent(ComponentInterface component) {
+        garbageComponent.add(component);
+    }
 
     private void cleanGarbageObject() {
         for (GameObject object : garbageObject) {

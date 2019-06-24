@@ -5,11 +5,14 @@ import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.Component
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.component.mesh.MeshInterface;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.GLTransform;
 import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.transform.Transform;
+import com.example.kaihatsuyoukanrisha.ueno_testapp.gameCore.manager.GameObjectManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
+
+public static String DEFAULT_TAG = "default";
 
 public class GameObject {
     public Transform transform = new GLTransform();
@@ -49,7 +52,9 @@ public class GameObject {
             object.update();
         }
 
-        protected void updateTransform(GameObject object) { object.updateTransform(); }
+        protected void updateTransform(GameObject object) {
+            object.updateTransform();
+        }
 
         protected void draw(GameObject object, GL10 gl) {
             object.draw(gl);
@@ -57,8 +62,8 @@ public class GameObject {
     }
 
     public GameObject() {
-        tag = "default";
-        layer = 0x1;
+        tag = DEFAULT_TAG;
+        layer = GameSDK.getSDK().GameObjectManager().layer["DEFAULT_LAYER"];
     }
 
     private void init() {
@@ -132,9 +137,13 @@ public class GameObject {
         GameSDK.getSDK().deleteComponent(component);
     }
 
-    public final GameObject getParent() { return parent; }
+    public final GameObject getParent() {
+        return parent;
+    }
 
-    public final List<GameObject> getChildren() { return children; }
+    public final List<GameObject> getChildren() {
+        return children;
+    }
 
     public void setParent(GameObject parent) {
         if (parent == this) return;
